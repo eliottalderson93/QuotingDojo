@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bulma.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+</head>
+
+<body>
+    <section class="hero is-black">
+        <div class="hero-body">
+            <div class="container">
+                <p class="title">Quotes</p>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <form method="post" action="/quotes">
+                <!-- tip to easily see objects printed in full instead of [object Object] -->
+                <% JSON.stringify(messages) %>
+                    <!-- based on the structure of your messages, determine how to display them -->
+                <% if(messages.registration) { %>
+                <% for (var x of messages.registration) { %>
+                <p class = "title is-6 is-warning">
+                <%= x %>
+                </p>
+                <% } %>
+                <% } %>
+                <div class = "level">
+                    <div class = "level-left">
+                        <label for="name">Name: </label>
+                        <input type="text" name="name">
+                    </div>
+                </div>
+                <div class = "level">
+                    <div class = "level-left">
+                        <label for="text">Your Favorite Quote: </label>
+                        <textarea type="textarea" name="text"></textarea>
+                    </div>
+                </div>
+                <button class = "button">Submit</button>
+            </form>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <p><% console.log("EJS::",quotes) %></p>
+            <% if(quotes[0] === "error"){ %>
+                <p>error</p>
+                <% } else { %>
+                <% for (quote in quotes){ %>
+                    <p class="title">
+                        <%= quotes[quote].name %>
+                    </p>
+                    <p class="subtitle">
+                        <%= quotes[quote].text %>
+                    </p>
+                    <% } %>
+                        <% } %>
+        </div>
+    </section>
+</body>
+
+</html>
